@@ -7,8 +7,9 @@ def ksqexp(s, t, l=1.):
 
 
 class GaussianProcess:
-    def __init__(self,kernel,kernel_par=None, mean_func=None):
+    def __init__(self,kernel,ktype='sqexp',kernel_par=None, mean_func=None):
         self.kernel=kernel
+        self.kernel_type = ktype
         self.kernel_par=kernel_par
 
         if mean_func == None:
@@ -18,6 +19,23 @@ class GaussianProcess:
         self.eval_x = None # fitted data
 
         self.diag_corr = 1e-3 # Small correction term in the case of singular covar matrix
+
+
+    # Move all the fitting routines into a seperate function
+    def fit_loglik(self, Y, m, Sigma):
+        return scipy.stats.multivariate_normal.logpdf(Y, mean=m, cov=Sigma)
+
+    def fit_objFunc(self, par, Y, tp):
+        S, T = np.meshgrid(tp, tp)
+        # Construct the covariance function for given parameter
+        C = self.kernel(S.ravel(), T.ravel(), par).reshape(tp.size, tp.size)
+        m = [self.mean_func(t) for t in tp]
+        return self.fit_loglik(Y, m, C)
+
+    def fit(self, Y, tp, add_err=False):
+        print self.fit_objFunc(1., Y, tp)
+        # Do something
+        return 0.
 
     def sim(self, tp):
         S, T = np.meshgrid(tp, tp)
