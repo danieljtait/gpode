@@ -1,0 +1,5 @@
+import numpy as np
+from gp_src import ksqexp, GaussianProcess
+
+gp1 = GaussianProcess(ksqexp, kernel_par=5.)
+tp = np.linspace(0., 3.5, 5)
