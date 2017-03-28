@@ -1,0 +1,4 @@
+import numpy
+
+class LatentVelocity:
+    def __init__(self, F, latentGP):
