@@ -94,3 +94,6 @@ class GaussianProcess:
             Cinv = np.linalg.inv(C)
             v = self.kernel(tev,tev, self.kernel_par) - np.dot(kk, np.dot(Cinv, kk))
             return mc, v
+
+
+

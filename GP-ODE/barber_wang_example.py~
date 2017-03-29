@@ -1,0 +1,4 @@
+import numpy as np
+
+def dXdt(X, t, par):
+    return np.array([X[1], -par*par*X[0]])
