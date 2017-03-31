@@ -8,19 +8,7 @@
         tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
         });
     </script>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script> 
-            
-    <!src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full" >
-    
-    <style>
-      h1 {
-        background: #CCCCCC;
-        padding: .2em 1em;
-        border-top: 3px solid #666666;
-        border-bottom: 3px solid #999999;
-     }
-    </style>
-    
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>  
   </head>
   <body>
      
@@ -35,7 +23,8 @@
         \frac{y_q(t)}{dt} + D_q y_q(t) = B_q + \sum_{r=1}^{R} S_{rq} f_r(t)
       $$
       For linear ODE's with constant coefficients the formal solution of this sytem can be expressed by a linear integral operator, therefore 
-      $y(t)$ is itself a Gaussian process with a covariance function given by convolution of the initial covariance function. 
+      $y(t)$ is itself a Gaussian process with a covariance function given by convolution of the initial covariance function. It is also worth
+      noting that for a system of equations not necessarily in diagonal form we can proceed by
       
       \begin{align}
         y = x
