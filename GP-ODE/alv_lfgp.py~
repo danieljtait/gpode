@@ -1,0 +1,5 @@
+import numpy as np
+
+## 
+# Fitting routines for the latent variable
+# force model in Alvarez et. al 

@@ -9,10 +9,8 @@ tp = np.linspace(0., 3.5, 5)
 # Simulate from this Gaussian Process
 rf = gp1.sim(tp)
 
-
 # Fit and interpolate
 gp1.interp_fit(tp, rf)
-
 
 tt = np.linspace(tp[0], 5, 150)
 fv  = [gp1.interp_evalf(t,wVar=True) for t in tt]
