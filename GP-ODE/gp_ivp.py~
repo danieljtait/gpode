@@ -1,6 +1,0 @@
-
-
-
-def interp_par(x0, t0,
-               Ts, X0s, Xs,
-               kernel_temp, kernel_spat)
