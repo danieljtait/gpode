@@ -32,6 +32,20 @@ def ky(p,q,s,t,
         k += S[r,p]*S[r,q]*rootPi*rho[r]*(h(s,t,q,p) + h(t,s,p,q))
     return 0.5*k    
 
+def kyf(p, q, s, t,
+        rho, nu_rq, D, S):
+
+    expr0 = 0.5*S[q,p]*rootPi/rho[p]*np.exp(nu_rq*nu_rq)
+
+    expr1 = np.exp(-D[p]*(s-t))
+
+    expr2 = erf( (t-s)/rho[r] - nu_rq ) + erf( t/rho[r] + nu_rq )
+
+    return expr0*expr1*expr2
+
+
+
+
 class GP_LVFM:
     def __init__(self, D, B, S, kernel_par):
         self.D = D
@@ -58,6 +72,8 @@ class GP_LVFM:
         for r in range(self.dim):
             k += self.S[r,p]*self.S[r,q]*rootPi*self.rho[r]*(self.h(t,s,q,p,r) + self.h(s,t,p,q,r))
         return 0.5*k
+
+
   
 
 def output_mean(t, y0, lv):
