@@ -44,10 +44,19 @@
     
       <div class="codebox">
         <code>
-          int main()
-          {
-            cout << "Hello World!";
-          }
+          D = np.array([1.,  0.7])
+          B = np.zeros(2)
+          
+          # Latent Gaussian Forces are indepent
+          S1 = np.array([[0.1, 0.0],
+                         [0.0, 0.1]])
+          
+          # Add some dependency structure
+          S2 = S1.copy()
+          S1[0, 1] = -0.5
+          
+          lvfm1 = GP_LVFM(D, B, S1, [0.1, 0.1])
+          lvfm2 = GP_LVFM(D, B, S2, [0.1, 0.1])
         </code>
       </div>
       
