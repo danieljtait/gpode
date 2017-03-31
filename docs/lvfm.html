@@ -1,0 +1,66 @@
+<!DOCTYPE html >
+<html>
+  <head>
+    <title>Latent Variable Gaussian Process Force Models </title>
+    <link rel="stylesheet" href="mystyle.css">
+     <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script> 
+            
+    <!src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full" >
+    
+    <style>
+      h1 {
+        background: #CCCCCC;
+        padding: .2em 1em;
+        border-top: 3px solid #666666;
+        border-bottom: 3px solid #999999;
+     }
+    </style>
+    
+  </head>
+  <body>
+     
+    <center>
+       <h1> Latent Variable Gaussian Process Force Models </h1>
+    </center>
+    
+    <div style="padding:0 2em">
+    <p>
+      It can be shown that for a diagonal system of first order linear differential equations with Gaussian processes forcing functions $f_r(t)$ defined by
+      $$
+        \frac{y_q(t)}{dt} + D_q y_q(t) = B_q + \sum_{r=1}^{R} S_{rq} f_r(t)
+      $$
+      For linear ODE's with constant coefficients the formal solution of this sytem can be expressed by a linear integral operator, therefore 
+      $y(t)$ is itself a Gaussian process with a covariance function given by convolution of the initial covariance function. 
+      
+      \begin{align}
+        y = x
+      \end{align}
+      The code underlying this example can be found in <a href="https://github.com/danieljtait/GP-ODE/blob/master/GP-ODE/alv_lfgp.py">alv_lfgp.py</a>
+    
+      <div class="codebox">
+        <code>
+          D = np.array([1.,  0.7])
+          B = np.zeros(2)
+          
+          # Latent Gaussian Forces are indepent
+          S1 = np.array([[0.1, 0.0],
+                         [0.0, 0.1]])
+          
+          # Add some dependency structure
+          S2 = S1.copy()
+          S1[0, 1] = -0.5
+          
+          lvfm1 = GP_LVFM(D, B, S1, [0.1, 0.1])
+          lvfm2 = GP_LVFM(D, B, S2, [0.1, 0.1])
+        </code>
+      </div>
+      
+      </p>
+    </div>
+  </body>
+</html>
