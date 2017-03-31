@@ -1,7 +1,15 @@
 <!DOCTYPE html >
 <html>
   <head>
-    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=MML_CHTML"></script>
+     <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script> 
+            
+    <!src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full" >
+    
   </head>
   <body>
     <h1> Hello, world! </h1>
@@ -18,6 +26,23 @@
         <mo>+</mo> <mi>c</mi> <mo>=</mo> <mn>0</mn>
       </math>
     
+    </p>
+    
+    <p>
+      $$
+        E = mc^2 
+      $$
+    </p>
+    
+    <p>
+      It can be shown that for a diagonal system of first order linear differential equations with Gaussian processes forcing functions $f_r(t)$ defined by
+      $$
+        \frac{y_q(t)}{dt} + D_q y_q(t) = B_q + \sum_{r=1}^{R} S_{rq} f_r(t)
+      $$
+      For
+      \begin{align}
+        y = x
+      \end{align}
     </p>
   </body>
 </html>
