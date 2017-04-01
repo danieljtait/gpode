@@ -17,6 +17,19 @@
     </center>
     
     <div style="padding:0 2em">
+      <h2> Univariate Example </h2>
+      <p> We begin our discussion with the simple case of a single latent force model of the form
+      $$
+         \dot{x}(t) = - D x(t) + f(t), 
+      $$
+      where $f(t)$ is a Gaussian process with a squared exponential kernel. For smooth $f(t)$ the ODE above is solved easily giving
+      $$
+        x(t) = x_0 e^{-D t} + \int_0^{t} e^{-D t - \tau } f(t- \tau) d\tau
+      $$
+      </p>
+    </div>  
+    
+    <div style="padding:0 2em">
     <p>
       It can be shown that for a diagonal system of first order linear differential equations with Gaussian processes forcing functions $f_r(t)$ defined by
       $$
