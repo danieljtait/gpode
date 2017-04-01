@@ -24,7 +24,7 @@
       $$
       where $f(t)$ is a Gaussian process with a squared exponential kernel. The ODE above is solved easily giving
       $$
-        x(t) = x_0 e^{-D t} + \int_0^{t} e^{-D t - \tau } f(\tau) d\tau.
+        x(t) = x_0 e^{-D t} + \int_0^{t} e^{-D(t - \tau) } f(\tau) d\tau.
       $$
       Which tells us that $x(t)$ is a linear transformation of a Gaussian process and therefore is itself a Gaussian process! With a new kernel
       new kernel given by convolution of the original kernel. This result immediately gives the required analytic tractability - 
