@@ -110,17 +110,20 @@ class gp_ode_bw_lf:
     def set_latent_states(self, tt, xx, g_xx, k='All'):
         self.eval_ts = tt
         xx = np.array(xx)
-
+        
         self.rep_latent_states = xx
         self.rep_latent_gp_forces = g_xx
         self.rep_latent_states_deriv = np.array([self.F(x,t,g_xx) for x, t in zip(self.rep_latent_states, tt)])
+            
+        if self.dim == 1 :
+            self.rep_latent_states = self.rep_latent_states[:,None]
+            self.rep_latent_states_deriv = self.rep_latent_states[:,None]
             
     ##
     #  the kth component of the latent state
     # given the representitive states
     def interp_latent_states_evalf(self, tev, k):
         Np = self.eval_ts.size
-
         
         S, T = np.meshgrid(self.eval_ts, self.eval_ts)
         
