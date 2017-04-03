@@ -117,7 +117,7 @@ class gp_ode_bw_lf:
             
         if self.dim == 1 :
             self.rep_latent_states = self.rep_latent_states[:,None]
-            self.rep_latent_states_deriv = self.rep_latent_states[:,None]
+            self.rep_latent_states_deriv = self.rep_latent_states_deriv[:,None]
             
     ##
     #  the kth component of the latent state
