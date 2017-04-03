@@ -101,6 +101,8 @@ class gp_ode_bw_lf:
         self.eval_ts = None
         self.eval_xs = None
 
+        self.F = F
+
         # Small correction term for singular cov matrices
         self.diag_corr = 1e-3
 
