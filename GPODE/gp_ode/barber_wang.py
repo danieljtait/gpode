@@ -50,8 +50,7 @@ class gp_ode_bw:
         xx = np.array(xx)
 
         self.rep_latent_states = xx
-        self.rep_latent_states_deriv = np.array([self.F(x,t,self) for x,t in zip(self.rep_latent_states, tt)])
-
+        self.rep_latent_states_deriv = np.array([self.F(x,t) for x,t in zip(self.rep_latent_states, tt)])
 
     ##
     #  the kth component of the latent state
@@ -86,6 +85,36 @@ class gp_ode_bw:
         return mc
 
 
+class gp_ode_bw_lf:
+    def __init__(self, F, kernels, ktypes='sqexp', kernels_par=None):
+        self.kernels = kernels
+        self.kernels_par = kernels_par
+        self.dim = len(kernels)
+
+        if isinstance(ktypes, basestring):
+            self.kernel_types = []
+            for d in range(self.dim):
+                self.kernel_types.append(ktypes)
+        else:
+            self.kernel_types = ktypes
+
+        self.eval_ts = None
+        self.eval_xs = None
+
+        # Small correction term for singular cov matrices
+        self.diag_corr = 1e-3
+
+    # Sets latent states including latent Gaussian force
+    def set_latent_states(self, tt, xx, g_xx, k='All'):
+        self.eval_ts = tt
+        xx = np.array(xx)
+
+        self.rep_latent_states = xx
+        self.rep_latent_gp_forces = g_xx
+        self.rep_latent_states_deriv = np.array([self.F(x,t,g_xx) for x, t in zip(self.rep_latent_states, tt)])
+            
+    
+
 ##
 # Full model, includes
 #
@@ -99,6 +128,8 @@ class gp_ode_bw:
 # - 
 # 
 #class gp_ode_model:
+
+
 
 
 class gp_ode_bw_gibbs_sampler:
