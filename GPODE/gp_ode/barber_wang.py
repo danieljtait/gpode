@@ -17,7 +17,7 @@ def ksqexp(s, t, par, n=0):
 
 # for compatibility with arbitrary dimensions require a tuple of kernels
 class gp_ode_bw:
-    def __init__(self, F, kernels, ktypes='sqexp', kernels_par=None):
+    def __init__(self, F, kernels, ktypes='sqexp', kernels_par=None, ode_class=None):
         self.kernels = kernels
         self.kernels_par = kernels_par
         self.dim = len(kernels)
@@ -29,6 +29,9 @@ class gp_ode_bw:
         else:
             self.kernel_types = ktypes
 
+        # Cetain aspects need to be handled differently if ode
+        # is of the form dx/dt = F(x,t) + G(t), for some Gaussian Process G(t)
+        self.ode_class = ode_class
         self.F = F
 
         self.eval_ts = None
@@ -47,7 +50,7 @@ class gp_ode_bw:
         xx = np.array(xx)
 
         self.rep_latent_states = xx
-        self.rep_latent_states_deriv = np.array([self.F(x,t) for x,t in zip(self.rep_latent_states, tt)])
+        self.rep_latent_states_deriv = np.array([self.F(x,t,self) for x,t in zip(self.rep_latent_states, tt)])
 
 
     ##
