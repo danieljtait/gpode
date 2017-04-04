@@ -123,20 +123,20 @@ class gp_ode_bw_lf:
     #  the kth component of the latent state
     # given the representitive states
     def interp_latent_states_evalf(self, tev, k):
-        Np = self.eval_ts.size
+        N_p = self.eval_ts.size
         
         S, T = np.meshgrid(self.eval_ts, self.eval_ts)
         
-        C00 = self.kernels[k](S.ravel(), T.ravel(), self.kernels_par[k]).reshape(Np, Np)
-        C01 = self.kernels[k](S.ravel(), T.ravel(), self.kernels_par[k],1).reshape(Np, Np)
-        C11 = self.kernels[k](S.ravel(), T.ravel(), self.kernels_par[k],2).reshape(Np, Np)
+        C00 = self.kernels[k](S.ravel(), T.ravel(), self.kernels_par[k]).reshape(N_p, N_p)
+        C01 = self.kernels[k](S.ravel(), T.ravel(), self.kernels_par[k],1).reshape(N_p, N_p)
+        C11 = self.kernels[k](S.ravel(), T.ravel(), self.kernels_par[k],2).reshape(N_p, N_p)
                 
 
         try:
             self.dLd = np.linalg.cholesky(C11)
         except:
             print "Singular covariance matrix... adding small multiple of identity."
-            self.dLd = np.linalg.cholesky(C11 + np.diag(self.diag_corr*np.ones(Np)))
+            self.dLd = np.linalg.cholesky(C11 + np.diag(self.diag_corr*np.ones(N_p)))
 
         # cov of
         kk = np.array([self.kernels[k](tev, s, self.kernels_par[k], 1) for s in self.eval_ts])
