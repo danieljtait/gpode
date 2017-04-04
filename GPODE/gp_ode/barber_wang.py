@@ -169,10 +169,10 @@ class gp_ode_bw_lf:
         
         try:
             C11inv = np.linalg.inv(C11)
-            return np.dot(C01, C11inv)
+            return np.dot(C01, C11inv), np.dot(C01,np.dot(C11inv,C01.T))
         except:
             C11 += np.diag(self.diag_corr*np.ones(N_p))
-            return np.dot(C01, C11inv)
+            return np.dot(C01, C11inv), np.dot(C01, np.dot(C11inv, C01.T))
 ##
 # Full model, includes
 #
