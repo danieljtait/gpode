@@ -149,7 +149,30 @@ class gp_ode_bw_lf:
         mc = np.dot(kk, s2)
 
         return mc
-
+       
+    #####################
+    # Returns the matrix A = Cd * (dCd)^{-1} where
+    #
+    #    cov(x,xdot) =  | C    Cd |
+    #                   | dC  dCd |,
+    #
+    # the transformation Ax = (Cd * dCd^{-1} )x
+    # acts like an ode numerical integral solver
+    def integrator_transform_matrix(self, k):
+        N_p = self.eval_ts.size
+        
+        S, T = np.meshgrid(self.eval_ts, self.eval_ts)
+        
+        C00 = self.kernels[k](S.ravel(), T.ravel(), self.kernels_par[k]).reshape(N_p, N_p)
+        C01 = self.kernels[k](S.ravel(), T.ravel(), self.kernels_par[k], 1).reshape(N_p, N_p)
+        C11 = self.kernels[k](S.ravel(), T.ravel(), self.kernels_par[k], 2).reshape(N_p, N_p)
+        
+        try:
+            C11inv = np.linalg.inv(C11)
+            return np.dot(C01, C11inv)
+        except:
+            C11 += np.diag(self.diag_corr*np.ones(N_p))
+            return np.dot(C01, C11inv)
 ##
 # Full model, includes
 #
