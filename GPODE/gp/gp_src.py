@@ -28,7 +28,11 @@ class GaussianProcess:
         S, T = np.meshgrid(eval_t,eval_t)
         C = self.kernel(S.ravel(), T.ravel(), self.kernel_par).reshape(eval_t.size, eval_t.size)
         m = [self.mean_func(t) for t in eval_t]
-        return scipy.stats.multivariate_normal.logpdf(x, mean=m, cov=C)
+        try:
+            return scipy.stats.multivariate_normal.logpdf(x, mean=m, cov=C)
+        except:
+            C+= np.diag(self.diag_corr*np.ones(eval_t.size))
+            return scipy.stats.multivariate_normal.logpdf(x, mnea=m, cov=C)
         
     # Move all the fitting routines into a seperate function
     def fit_loglik(self, Y, m, Sigma):
