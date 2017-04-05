@@ -20,7 +20,16 @@ class GaussianProcess:
 
         self.diag_corr = 1e-3 # Small correction term in the case of singular covar matrix
 
-
+    # Evaluate the log probability of the Gaussian process
+    def logpdf(self, x, eval_t = None):
+        eval_t = np.array(eval_t)
+        if eval_t == None:
+            eval_t = self.eval_t
+        S, T = np.meshgrid(eval_t,eval_t)
+        C = self.kernel(S.ravel(), T.ravel(), self.kernel_par).reshape(eval_t.size, eval_t.size)
+        m = [self.mean_func(t) for t in eval_t]
+        return scipy.stats.multivariate_normal.logpdf(x, mean=m, cov=C)
+        
     # Move all the fitting routines into a seperate function
     def fit_loglik(self, Y, m, Sigma):
         return scipy.stats.multivariate_normal.logpdf(Y, mean=m, cov=Sigma)
