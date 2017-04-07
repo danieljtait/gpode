@@ -8,3 +8,4 @@ from gp import *
 from gp_ode import *
 
 
+from .core import GaussianProcess, ksqexp

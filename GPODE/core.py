@@ -1,9 +1,16 @@
 import numpy as np
 import scipy.stats
 
-
 def ksqexp(s, t, l=1.):
     return np.exp(-0.5*l*(s-t)**2)
+
+# Kernel types:
+#
+# sqexp
+class kernel:
+    def __init__(self, ktype, dim=1):
+        self.ktype = ktype
+        self.dim = dim
 
 
 class GaussianProcess:
