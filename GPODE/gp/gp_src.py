@@ -32,7 +32,7 @@ class GaussianProcess:
             return scipy.stats.multivariate_normal.logpdf(x, mean=m, cov=C)
         except:
             C+= np.diag(self.diag_corr*np.ones(eval_t.size))
-            return scipy.stats.multivariate_normal.logpdf(x, mnea=m, cov=C)
+            return scipy.stats.multivariate_normal.logpdf(x, mean=m, cov=C)
         
     # Move all the fitting routines into a seperate function
     def fit_loglik(self, Y, m, Sigma):
