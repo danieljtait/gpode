@@ -4,6 +4,9 @@
 # regenerated. Lines beginning with # are comments. You can also ignore
 
 
+# Byte-compiled / optimized /DLL files
+__pycache__/
+
 # regular python bytecode file
 *.pyc
 
