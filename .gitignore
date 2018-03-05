@@ -9,3 +9,6 @@
 
 # optimise python bytecode file
 *.pyo
+
+# mac osx specific
+.DS_Store
