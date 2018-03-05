@@ -1,0 +1,6 @@
+
+
+class ProbabilityDistribution:
+    def __init__(self, pdf=None, rvs=None):
+        self.pdf=pdf
+        self.rvs=rvs
