@@ -1,5 +1,0 @@
-import numpy as np
-import matplotlib.pyplot as plt
-from gp_src import ksqexp, GaussianProcess
-
-gp1 = GaussianProcess(ksqexp, kernel_par=5.)

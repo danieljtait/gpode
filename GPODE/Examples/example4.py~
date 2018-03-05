@@ -1,6 +1,0 @@
-import numpy as np
-from gp_ode_src import LatentVelocity
-from gp_src import ksqexp, GaussianProcess
-
-def dXdt(X,t=0):
-    return -np.array([-X[1],X[0]])
