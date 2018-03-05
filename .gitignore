@@ -1,0 +1,11 @@
+# This file tells git what files to ignore (e.g., you won't see them as
+# untracked with "git status"). Add anything to it that can be cleared
+# without any worry (e.g., by "git clean -Xdf"), because it can be
+# regenerated. Lines beginning with # are comments. You can also ignore
+
+
+# regular python bytecode file
+*.pyc
+
+# optimise python bytecode file
+*.pyo

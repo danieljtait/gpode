@@ -1,0 +1,7 @@
+
+
+# regular python bytecode file
+*.pyc
+
+# optimise python bytecode file
+*.pyo
