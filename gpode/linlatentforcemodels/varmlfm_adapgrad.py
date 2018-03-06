@@ -80,6 +80,39 @@ class varmlfm_adapgrad:
         self._init_G_var_dist()
 
 
+    def _init_X_var_dist(self, scale=0.1):
+        self._X_means = [np.zeros(self.dim.N)
+                         for k in range(self.dim.K)]
+
+        self._X_covars = []
+
+        for i in range(self.dim.K):
+            for j in range(i+1):
+                if i == j:
+                    _C = np.diag(scale*np.ones(self.dim.N))
+                else:
+                    _C = np.zeros((self.dim.N, self.dim.N))
+
+                self._X_covars[(i, j)] = _C
+                self._X_covars[(j, i)] = _C
+
+
+    def _init_G_var_dist(self):
+        self._G_means = [np.zeros(self.dim.N)
+                         for r in range(self.dim.R)]
+
+        self._G_covars = {}
+        for s in range(self.dim.R):
+            for t in range(s+1):
+                if s==t:
+                    _C = np.diag(self.dim.N)
+                else:
+                    _C = np.zeros((self.dim.N, self.dim.N))
+
+                self._G_covars[(s, t)] = _C
+                self._G_covars[(t, s)] = _C
+
+
 """
 Initalisation Utility Functions
 
