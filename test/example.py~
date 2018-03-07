@@ -1,0 +1,31 @@
+import numpy as np
+import VarMLFM_adapGrad
+from scipy.integrate import odeint
+import matplotlib.pyplot as plt
+np.set_printoptions(precision=2)
+
+A0 = np.array([[0.0, 0.],
+               [0., 0.]])
+A1 = np.array([[0., -1.],
+               [1., 0.]])
+
+tt = np.linspace(0., 2., 5)
+x0 = np.array([1., 0.])
+
+def g1(t):
+    return np.sin(t)
+
+sol = odeint(lambda x, t: np.dot(A0 + g1(t)*A1, x), x0, tt)
+
+x_gp_par = ([1., 1.],
+            [1., 1.])
+g_gp_par = ([1., 1.],)
+
+
+vobj = varmlfm_adapgrad([A0, A1],
+                        tt,
+                        sol,
+                        [0.5, 0.5],
+                        [.1, .1],
+                        x_gp_par,
+                        g_gp_par)
